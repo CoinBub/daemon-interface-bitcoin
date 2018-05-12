@@ -43,7 +43,6 @@ EXPOSE 3333 13754 13755
 
 COPY --from=builder /tmp/bitcoin/src/bitcoind /usr/local/bin/bitcoind
 COPY --from=builder /tmp/bitcoin/src/bitcoin-cli /usr/local/bin/bitcoin-cli
-#COPY .docker/conf "$conf"
 COPY .docker /
 
 RUN apt-get -y update \

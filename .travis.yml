@@ -12,4 +12,4 @@ cache:
     - $HOME/.m2/
 
 script:
-  - mvn test -B -DcontainerLocation=localhost:10001
+  - mvn test jacoco:report coveralls:report -B -DcontainerLocation=localhost:10001
