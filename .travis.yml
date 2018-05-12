@@ -1,0 +1,15 @@
+language: java
+jdk:
+  - oraclejdk8
+  - oraclejdk9
+  - openjdk8
+sudo: required
+services:
+  - docker
+
+cache:
+  directories:
+    - $HOME/.m2/
+
+script:
+  - mvn test -B -DcontainerLocation=localhost:10001
