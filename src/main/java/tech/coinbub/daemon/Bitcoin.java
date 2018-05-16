@@ -160,6 +160,8 @@ public interface Bitcoin {
     String getnewaddress(String label, String address_type);
 
     String getbestblockhash();
+    
+    String getblockhash(Long height);
 
     Block getblock(String blockhash);
     Block getblock(String blockhash, int verbosity);
