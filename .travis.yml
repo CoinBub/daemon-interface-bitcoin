@@ -11,5 +11,8 @@ cache:
   directories:
     - $HOME/.m2/
 
+before_install:
+  - docker pull coinbub/bitcoin-daemon
+
 script:
   - mvn test jacoco:report coveralls:report -B -DcontainerLocation=localhost:10001
