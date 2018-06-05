@@ -2,6 +2,7 @@ package tech.coinbub.daemon.bitcoin;
 
 import java.math.BigDecimal;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.closeTo;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasSize;
@@ -70,7 +71,7 @@ public class NormalizedBitcoinIT {
         assertThat(tx, hasOnly(
                 property("id", is(not(nullValue()))),
                 property("amount", is(equalTo(new BigDecimal("-1.0")))),
-                property("fee", is(equalTo(new BigDecimal("-0.0000332")))),
+                property("fee", is(closeTo(new BigDecimal("-0.0000332"), new BigDecimal("0.00002")))),
                 property("time", is(not(nullValue()))),
                 property("confirmations", is(equalTo(0L))),
                 property("details", hasSize(1))
@@ -81,7 +82,7 @@ public class NormalizedBitcoinIT {
         assertThat(detail, hasOnly(
                 property("address", is(equalTo(SendToAddressIT.NEW_ADDRESS))),
                 property("amount", is(equalTo(new BigDecimal("-1.0")))),
-                property("fee", is(equalTo(new BigDecimal("-0.0000332"))))
+                property("fee", is(closeTo(new BigDecimal("-0.0000332"), new BigDecimal("0.00002"))))
         ));
     }
 
@@ -92,7 +93,7 @@ public class NormalizedBitcoinIT {
         assertThat(tx, hasOnly(
                 property("id", is(not(nullValue()))),
                 property("amount", is(equalTo(new BigDecimal("-1.0")))),
-                property("fee", is(equalTo(new BigDecimal("-0.0000332")))),
+                property("fee", is(closeTo(new BigDecimal("-0.0000332"), new BigDecimal("0.00002")))),
                 property("time", is(not(nullValue()))),
                 property("confirmations", is(equalTo(0L))),
                 property("details", hasSize(1)),
@@ -103,7 +104,7 @@ public class NormalizedBitcoinIT {
         assertThat(detail, hasOnly(
                 property("address", is(equalTo(SendToAddressIT.NEW_ADDRESS))),
                 property("amount", is(equalTo(new BigDecimal("-1.0")))),
-                property("fee", is(equalTo(new BigDecimal("-0.0000332"))))
+                property("fee", is(closeTo(new BigDecimal("-0.0000332"), new BigDecimal("0.00002"))))
         ));
     }
 
@@ -114,7 +115,7 @@ public class NormalizedBitcoinIT {
         assertThat(tx, hasOnly(
                 property("id", is(not(nullValue()))),
                 property("amount", is(equalTo(new BigDecimal("-1.0")))),
-                property("fee", is(equalTo(new BigDecimal("-0.0000332")))),
+                property("fee", is(closeTo(new BigDecimal("-0.0000332"), new BigDecimal("0.00002")))),
                 property("time", is(not(nullValue()))),
                 property("confirmations", is(equalTo(0L))),
                 property("details", hasSize(1)),
@@ -126,7 +127,7 @@ public class NormalizedBitcoinIT {
         assertThat(detail, hasOnly(
                 property("address", is(equalTo(SendToAddressIT.NEW_ADDRESS))),
                 property("amount", is(equalTo(new BigDecimal("-1.0")))),
-                property("fee", is(equalTo(new BigDecimal("-0.0000332"))))
+                property("fee", is(closeTo(new BigDecimal("-0.0000332"), new BigDecimal("0.00002"))))
         ));
     }
 
