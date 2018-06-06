@@ -14,6 +14,8 @@ cache:
 
 before_install:
   - docker pull coinbub/bitcoin-daemon
+  - pip install --user awscli
+  - export PATH=$PATH:$HOME/.local/bin
 
 install:
   - mvn dependency:go-offline
@@ -21,11 +23,22 @@ install:
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build
 
 script:
   - mvn test jacoco:report coveralls:report -B
 
 after_script:
-  - JACOCO_SOURCE_PATH=src/main/java ./cc-test-reporter format-coverage target/site/jacoco/jacoco.xml --input-type jacoco
-  - ./cc-test-reporter upload-coverage
+  - JACOCO_SOURCE_PATH=src/main/java ./cc-test-reporter format-coverage target/site/jacoco/jacoco.xml --input-type jacoco --output "coverage/codeclimate.$TRAVIS_BUILD_NUMBER.json"
+  - aws s3 sync coverage/ "$COVERAGE_BUCKET"
+
+jobs:
+  include:
+    - stage: deploy
+      before_install:
+        - pip install --user awscli
+        - export PATH=$PATH:$HOME/.local/bin
+        - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+        - chmod +x ./cc-test-reporter
+      script:
+        - aws s3 sync "$COVERAGE_BUCKET" coverage/
+        - ./cc-test-reporter sum-coverage --output - coverage/codeclimate.*.json | ./cc-test-reporter upload-coverage --input -
