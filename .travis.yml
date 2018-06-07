@@ -40,4 +40,5 @@ jobs:
       script:
         - aws s3 sync "$COVERAGE_BUCKET" coverage/
         - ./cc-test-reporter sum-coverage --output - coverage/codeclimate.*.json | ./cc-test-reporter upload-coverage --input -
-      after_script: true
+      after_script:
+        - aws s3 rm --recursive "$COVERAGE_BUCKET"
