@@ -10,7 +10,6 @@ services:
 cache:
   directories:
     - $HOME/.m2/
-    - $HOME/cc-test-reporter
 
 before_install:
   - pip install --user awscli
@@ -26,7 +25,7 @@ script:
   - mvn test jacoco:report -B
 
 after_script:
-  - JACOCO_SOURCE_PATH=src/main/java ./cc-test-reporter format-coverage target/site/jacoco/jacoco.xml --input-type jacoco --output "coverage/codeclimate.$TRAVIS_BUILD_NUMBER.json"
+  - JACOCO_SOURCE_PATH=src/main/java ./cc-test-reporter format-coverage target/site/jacoco/jacoco.xml --input-type jacoco --output "coverage/codeclimate.$TRAVIS_BUILD_ID.json"
   - aws s3 sync coverage/ "$COVERAGE_BUCKET"
 
 jobs:
