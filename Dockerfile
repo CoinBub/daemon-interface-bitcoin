@@ -15,6 +15,7 @@ RUN add-apt-repository ppa:bitcoin/bitcoin \
         bsdmainutils \
         build-essential \
         git \
+        iproute2 \
         libboost-all-dev \
         libdb4.8-dev \
         libdb4.8++-dev \
@@ -52,6 +53,7 @@ RUN add-apt-repository ppa:bitcoin/bitcoin \
  && apt-get -y update \
  && apt-get -y install \
         gettext \
+        iproute2 \
         libboost-filesystem-dev \
         libboost-program-options-dev \
         libboost-system-dev \

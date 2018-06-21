@@ -10,6 +10,11 @@ import tech.coinbub.daemon.normalization.Normalized;
 public class NormalizedBitcoin implements Normalized<Bitcoin> {
     private final Bitcoin client;
 
+    @Override
+    public String getSymbol() {
+        return Bitcoin.SYMBOL;
+    }
+
     public NormalizedBitcoin(final Bitcoin client) {
         if (client == null) {
             throw new IllegalArgumentException("Client must not be null");
@@ -84,16 +89,16 @@ public class NormalizedBitcoin implements Normalized<Bitcoin> {
         result.comment_from = tx.comment;
         result.comment_to = tx.to;
 
-        if (!tx.details.isEmpty()) {
+        if (tx.details != null && !tx.details.isEmpty()) {
             result.details = new ArrayList<>();
-        }
-        for (TransactionDetail rawDetail : tx.details) {
-            final tech.coinbub.daemon.normalization.model.TransactionDetail detail
-                    = new tech.coinbub.daemon.normalization.model.TransactionDetail();
-            detail.address = rawDetail.address;
-            detail.amount = rawDetail.amount;
-            detail.fee = rawDetail.fee;
-            result.details.add(detail);
+            for (TransactionDetail rawDetail : tx.details) {
+                final tech.coinbub.daemon.normalization.model.TransactionDetail detail
+                        = new tech.coinbub.daemon.normalization.model.TransactionDetail();
+                detail.address = rawDetail.address;
+                detail.amount = rawDetail.amount;
+                detail.fee = rawDetail.fee;
+                result.details.add(detail);
+            }
         }
 
         return result;

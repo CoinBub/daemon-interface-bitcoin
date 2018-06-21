@@ -137,6 +137,7 @@ import java.math.BigDecimal;
 
 
 public interface Bitcoin {
+    public static final String SYMBOL = "BTC";
     /**
      * `getnewaddress ( "label" "address_type" )`
      *
