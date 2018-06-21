@@ -15,6 +15,7 @@ public class Block {
     public Long version;
     public String versionHex;
     public String merkleroot;
+    public Long nTx;
     public List<Transaction> tx;
     public Long time;
     public Long mediantime;
